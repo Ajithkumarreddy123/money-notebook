@@ -159,18 +159,37 @@ input,textarea,select{border:1.5px solid var(--line);border-radius:14px}
 .shake{animation:shake .35s}@keyframes shake{20%,60%{transform:translateX(-9px)}40%,80%{transform:translateX(9px)}}
 .obi{font-size:58px}
 #lkob form{display:grid;gap:10px;width:100%}#lkob>.go,#lkob>.lf{width:100%}
+
+#burger{width:44px;height:44px;border:0;border-radius:14px;background:var(--card);color:var(--ink);font-size:22px;box-shadow:0 4px 14px rgba(40,70,140,.1);cursor:pointer;flex:none}
+#nav{position:fixed;left:0;top:0;bottom:0;right:auto;width:260px;max-width:80vw;margin:0;border-radius:0 30px 30px 0;padding:84px 12px 20px;flex-direction:column;justify-content:flex-start;gap:6px;transform:translateX(-105%);transition:transform .28s ease;z-index:45;display:flex}
+#nav.open{transform:none}#nav::before{content:"\1F4B0  Money Notebook";position:absolute;top:30px;left:22px;font-weight:800;font-size:18px}
+#nav button{flex-direction:row;justify-content:flex-start;align-items:center;gap:14px;width:100%;padding:14px 16px;font-size:16px;text-align:left}#nav button span{font-size:22px}
+#scrim{position:fixed;inset:0;background:rgba(10,20,50,.45);opacity:0;pointer-events:none;transition:opacity .25s;z-index:44}#scrim.on{opacity:1;pointer-events:auto}
+body{padding-bottom:30px}
+#pig{position:fixed;inset:0;z-index:70;display:none;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,20,50,.5);pointer-events:none}#pig.show{display:flex;animation:pg 2.6s ease both}
+@keyframes pg{0%{opacity:0}12%{opacity:1}85%{opacity:1}100%{opacity:0}}
+.fl.fin{animation:fin 2s ease-out .3s both}.fl.fout{animation:fout 2s ease-in .3s both}
+@keyframes fin{from{transform:translateY(130px)}to{transform:translateY(-4px)}}@keyframes fout{from{transform:translateY(-4px)}to{transform:translateY(130px)}}
+.coin{animation:cn 1s ease-in .1s both}@keyframes cn{from{transform:translateY(-30px);opacity:0}30%{opacity:1}to{transform:translateY(40px);opacity:0}}
+.pl2{font-size:34px;font-weight:800;margin-top:6px}
+.pr{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}.pr small{display:block;color:var(--mute);font-size:11px}.pr b{font-size:14px}
+.pin{width:100%;padding:6px;text-align:center;font-weight:700}.bar{height:8px;border-radius:6px;background:var(--line);overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;border-radius:6px}
+.fts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.rcg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}.rc{position:relative;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:8px;display:grid;gap:2px}
+.rc img{width:100%;height:110px;object-fit:cover;border-radius:12px}.rc small{color:var(--mute)}.rc button{position:absolute;top:12px;right:12px;border:0;border-radius:10px;background:rgba(255,255,255,.9);padding:4px 6px;cursor:pointer}
+.rcv{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.88);display:grid;place-items:center;padding:12px}.rcv img{max-width:100%;max-height:100%;border-radius:12px}
 </style>
 <link rel="manifest" href="manifest.json"><link rel="apple-touch-icon" href="icon-192.png"></head>
 <body>
 <main>
-<header id="hd"><div class="av" id="av">F</div><div class="gt"><p class="sub" id="hi"></p><div class="nm" id="nm"></div></div><div class="clk"><b id="ck"></b><small id="dt"></small></div></header>
+<header id="hd"><button id="burger" aria-label="Open menu">☰</button><div class="av" id="av">F</div><div class="gt"><p class="sub" id="hi"></p><div class="nm" id="nm"></div></div><div class="clk"><b id="ck"></b><small id="dt"></small></div></header><div id="scrim"></div><div id="pig"></div>
 <div class="sum" id="sum"></div>
 <div id="alert" aria-live="polite"></div>
 <section id="view"></section>
 <p class="note" id="st">Saved on this phone only.</p>
 <p class="note">Analysis is a helper, not financial or tax advice.</p>
 </main>
-<nav id="nav" aria-label="Main menu"><button data-t="home"><span>🏠</span>Home</button><button data-t="sav"><span>💰</span>Savings</button><button data-t="lent"><span>🤝</span>Lent</button><button data-t="chit"><span>🪙</span>Chits</button><button data-t="more"><span>☰</span>More</button></nav>
+<nav id="nav" aria-label="Main menu"><button data-t="home"><span>🏠</span>Home</button><button data-t="sav"><span>💰</span>Savings</button><button data-t="lent"><span>🤝</span>Lent</button><button data-t="chit"><span>🪙</span>Chits</button><button data-t="plan"><span>📊</span>Plan</button><button data-t="rcpt"><span>🧾</span>Receipts</button><button data-t="more"><span>⋯</span>More</button></nav>
 <div id="toast" role="status" aria-live="polite"></div>
 <div id="lock" role="dialog" aria-label="Locked"><div class="lkw"><div id="lkpad" class="lkpad"><div class="lkav">🔒</div><h1 id="lkt"></h1><p id="lks"></p><div class="pl" id="pl"><button type="button" data-n="4" class="on">4 digits</button><button type="button" data-n="6">6 digits</button></div><div class="dots" id="dots"></div><p class="lkm" id="lm" aria-live="polite"></p><div class="pad"><button type="button" data-k="1">1</button><button type="button" data-k="2">2</button><button type="button" data-k="3">3</button><button type="button" data-k="4">4</button><button type="button" data-k="5">5</button><button type="button" data-k="6">6</button><button type="button" data-k="7">7</button><button type="button" data-k="8">8</button><button type="button" data-k="9">9</button><button type="button" class="alt" data-k="fp" id="kfp" aria-label="Use fingerprint"><svg viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M12 3a8 8 0 0 0-8 8v1"/><path d="M12 6a5 5 0 0 0-5 5c0 3-1 5-2 6.5"/><path d="M12 9a2 2 0 0 0-2 2c0 3.5-1 6-2.5 8"/><path d="M12 12v1c0 3-.7 5.2-1.8 7.2"/><path d="M15 11a3 3 0 0 0-.4-1.5"/><path d="M16.2 14.5c-.2 2.2-.8 4-1.6 5.6"/><path d="M19.5 17c.3-1.5.5-3.2.5-5a8 8 0 0 0-3.5-6.6"/></svg></button><button type="button" data-k="0">0</button><button type="button" class="alt" data-k="bk" aria-label="Delete">⌫</button></div><button type="button" class="go lu" id="lu">Unlock</button><button type="button" class="lf" id="lf">Forgot PIN</button><button type="button" class="lf" id="lskip">Cancel</button></div><div id="lkob" class="lkpad" style="display:none"></div></div></div>
 <script>
@@ -179,7 +198,7 @@ function ok(p){return p&&p.exp&&p.lent&&p.inc;}
 function norm(p){p.notes=p.notes||[];p.chits=p.chits||[];p.goal=p.goal||null;p.rem=p.rem||[];p.name=p.name||"Friend";p.sav=p.sav||{start:0,set:false,tx:[]};p.sav.tx=p.sav.tx||[];p.ts=p.ts||0;return p;}
 function txsum(){return S.sav.tx.reduce(function(a,t){return a+t.amt},0);}
 function bal(){return (S.sav.start||0)+txsum();}
-function tx(a,date,note,ref,tm){S.sav.tx.push({id:id(),date:date,tm:tm||nowT(),amt:a,note:note||"",ref:ref||""});}
+function tx(a,date,note,ref,tm){S.sav.tx.push({id:id(),date:date,tm:tm||nowT(),amt:a,note:note||"",ref:ref||""});try{piggy(a);}catch(e){}}
 try{var raw=localStorage.getItem(KEY);if(raw){var p0=JSON.parse(raw);if(ok(p0))S=norm(p0);}}catch(e){}
 function setStatus(t){var el=document.getElementById("st");if(el)el.textContent=t;}
 function save(){S.ts=Date.now();try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}
@@ -230,7 +249,7 @@ function sum(){
 }
 function del(k,i){return'<div class="act"><button data-del="'+k+'" data-id="'+i+'">Delete</button></div>';}
 function byDate(a,b){return ((b.date||b.start)+(b.tm||"")).localeCompare((a.date||a.start)+(a.tm||""));}
-var selDay=null,alp=[],prevBal=null,MAIN=["home","sav","lent","chit"],PT={more:"☰ More",sav:"💰 Savings",exp:"🧾 Spend",lent:"🤝 Lent",chit:"🪙 Chit funds",inc:"💵 Income",notes:"📝 Notes",rem:"⏰ Reminders",ai:"🤖 Ask AI",set:"⚙️ Settings"},SUB=["exp","inc","notes","rem","ai","set"];
+var selDay=null,alp=[],prevBal=null,MAIN=["home","sav","lent","chit","plan","rcpt"],PT={plan:"📊 Plan",rcpt:"🧾 Receipts",more:"☰ More",sav:"💰 Savings",exp:"🧾 Spend",lent:"🤝 Lent",chit:"🪙 Chit funds",inc:"💵 Income",notes:"📝 Notes",rem:"⏰ Reminders",ai:"🤖 Ask AI",set:"⚙️ Settings"},SUB=["exp","inc","notes","rem","ai","set"];
 function greetWord(){var h=new Date().getHours();return h>=5&&h<12?"Good morning":h>=12&&h<17?"Good afternoon":h>=17&&h<21?"Good evening":"Good night";}
 function greetEmoji(){var h=new Date().getHours();return h>=5&&h<12?"\uD83C\uDF05":h>=12&&h<17?"\u2600\uFE0F":h>=17&&h<21?"\uD83C\uDF07":"\uD83C\uDF19";}
 function greet(){var nm=S.name||"Friend",g=function(i){return document.getElementById(i);};if(!g("hi"))return;g("hi").textContent=greetEmoji()+" "+greetWord();g("nm").textContent=nm;g("av").textContent=nm.charAt(0).toUpperCase();g("ck").textContent=tm12(nowT());g("dt").textContent=new Date().toLocaleDateString("en-IN",{weekday:"short",day:"numeric",month:"short"});}
@@ -247,7 +266,7 @@ function dayStrip(){var h='<div class="days">',b=new Date();b.setHours(0,0,0,0);
   h+='<button class="dy'+(selDay===ds?' on':(selDay===null&&ds===today()?' tdy':''))+'" data-day="'+ds+'"><small>'+nm[d.getDay()]+'</small><b>'+d.getDate()+'</b><i'+(has?' class="dot"':'')+'></i></button>';}
  return h+'</div>';}
 function render(){
- sum();greet();
+ sum();greet();applyFeat();
  document.querySelectorAll("#nav button").forEach(function(b){b.setAttribute("aria-selected",b.dataset.t===tab||(b.dataset.t==="more"&&MAIN.indexOf(tab)<0))});
  document.getElementById("sum").style.display=tab==="home"?"grid":"none";
  document.getElementById("alert").style.display=(tab==="home"||tab==="lent"||tab==="chit"||tab==="rem")?"block":"none";
@@ -263,7 +282,7 @@ function render(){
     else h+='<div class="empty">\uD83C\uDF89 Nothing pending. Add a reminder to stay on track.</div>';}
  }else if(tab==="more"){
   h+='<div class="menu"><button data-go="exp"><span>🧾</span>Spend</button><button data-go="inc"><span>💵</span>Income</button><button data-go="notes"><span>📝</span>Notes</button><button data-go="rem"><span>⏰</span>Reminders</button>'+(typeof claude!=="undefined"?'<button data-go="ai"><span>🤖</span>Ask AI</button>':'')+'<button data-go="set"><span>⚙️</span>Settings</button></div>';
- }else if(tab==="rem"){
+ }else if(tab==="plan"){h+=planPage();}else if(tab==="rcpt"){h+=rcptPage();}else if(tab==="rem"){
   var ns=!!window.Notification,pm=ns?Notification.permission:"none";
   h+='<div class="row"><b>🔔 Notifications</b>'+(pm==="granted"?'<span class="ok">On ✅</span>':pm==="denied"?'<span class="meta">Blocked in your browser settings.</span>':ns?'<button class="go" data-notif="1">Turn on notifications</button>':'<span class="meta">Not supported in this browser.</span>')+'<span class="meta">Alerts show while the app is open, and when you open it. For a guaranteed alarm, also set a phone alarm.</span></div>';
   h+='<form class="box" id="fr"><label>Remind me to<input name="text" maxlength="80" required></label><div class="two"><label>Date<input name="date" type="date" value="'+today()+'" required></label><label>Time<input name="time" type="time" value="09:00" required></label></div><button class="go">⏰ Add reminder</button></form>';
@@ -282,7 +301,7 @@ function render(){
   h+=S.sav.tx.length?S.sav.tx.slice().sort(byDate).map(function(t){return'<div class="row"><div class="top"><b class="'+(t.amt>0?'inc':'exp')+'">'+(t.amt>0?'+':'-')+inr(Math.abs(t.amt))+'</b><span class="meta">'+ft(t)+'</span></div><span class="txt">'+esc(t.note||"Savings change")+'</span>'+del("tx",t.id)+'</div>'}).join(""):'<div class="empty">No savings changes yet. Set your current savings, then add or take out money.</div>';
  }else if(tab==="exp"||tab==="inc"){
   var cls=tab==="exp"?"exp":"inc";
-  h+='<form class="box" id="f">'+amtDate+'<label>'+(tab==="exp"?"What was it for":"Who or what for")+'<input name="note" maxlength="60" required></label><label class="chk"><input type="checkbox" name="sv" checked>'+(tab==="exp"?"Take from savings":"Add to savings")+'</label><button class="go">Save</button></form>';
+  h+='<form class="box" id="f">'+amtDate+'<label>'+(tab==="exp"?"What was it for":"Who or what for")+'<input name="note" maxlength="60" required></label>'+(tab==="exp"?catSel():"")+'<label class="chk"><input type="checkbox" name="sv" checked>'+(tab==="exp"?"Take from savings":"Add to savings")+'</label><button class="go">Save</button></form>';
   h+=S[tab].length?S[tab].slice().sort(byDate).map(function(x){return'<div class="row"><div class="top"><b class="'+cls+'">'+inr(x.amt)+'</b><span class="meta">'+ft(x)+'</span></div><span class="txt">'+esc(x.note)+'</span>'+del(tab,x.id)+'</div>'}).join(""):'<div class="empty">Nothing noted yet.</div>';
  }else if(tab==="chit"){
   h+='<form class="box" id="f"><div class="two"><label>Chit name<input name="name" maxlength="40" required></label><label>Months (optional)<input name="months" type="number" inputmode="numeric" min="1" step="1"></label></div><div class="two"><label>Due day (1-31, optional)<input name="dd" type="number" min="1" max="31" inputmode="numeric"></label><label>Monthly amount (optional)<input name="ma" type="number" min="1" step="any" inputmode="decimal"></label></div><button class="go">Add chit</button></form>';
@@ -291,7 +310,7 @@ function render(){
   var pd=pinData(),sc=!!(window.crypto&&crypto.subtle);
   h+='<div class="row"><b>👤 Your name</b><form id="fn" class="pf"><input name="nm" value="'+esc(S.name)+'" maxlength="30" required aria-label="Your name"><button class="go">Save name</button></form></div>';
   h+='<div class="row"><b>💾 Backup</b><span class="meta">Save a copy of all your notes so you never lose them.</span><div class="act"><button data-bk="copy">Copy backup</button><button data-bk="dl">Download file</button></div><textarea id="rs" rows="3" placeholder="To restore, paste a backup here" aria-label="Paste backup to restore"></textarea><input id="rf" type="file" accept=".json,.txt" aria-label="Choose backup file"><div class="act"><button data-bk="restore">Restore from text</button></div><span class="meta" id="smsg" aria-live="polite"></span></div>';
-  h+=lockCard();
+  h+=lockCard()+featCard();
    h+='<div class="row"><b>🛡️ Safety</b><span class="meta">Your notes stay in this browser on this phone. Do not note card numbers, bank passwords, or OTPs here. Keep your phone locked and back up now and then. A PIN stops casual snooping but is not strong encryption.</span></div>';
  }else if(tab==="notes"){
   h+='<form class="box" id="f"><label>Write anything<textarea name="text" rows="4" maxlength="2000" required></textarea></label><button class="go">Save note</button></form>';
@@ -398,7 +417,7 @@ $("lock").addEventListener("submit",function(e){e.preventDefault();var f=e.targe
 var fg2=false;$("lf").onclick=function(){var b=this;if(!fg2){fg2=true;b.textContent="Tap again: this erases all data on this phone";return;}try{localStorage.removeItem(KEY);localStorage.removeItem(PK);localStorage.removeItem(CK);localStorage.removeItem("mnSetup1");}catch(e){}location.reload();};
 function ob(h){$("lkob").innerHTML=h;lkShow("ob");}
 function setupDone(){try{return localStorage.getItem("mnSetup1")==="1";}catch(e){return true;}}
-function setupFin(){try{localStorage.setItem("mnSetup1","1");}catch(e){}lkHide();render();}
+function setupFin(){try{localStorage.setItem("mnSetup1","1");}catch(e){}lkHide();render();notifOn().then(syncNotifs);}
 function onboard(){ob('<div class="obi">\uD83D\uDC4B</div><h1>Welcome!</h1><p>Your private money notebook. Everything stays on this phone.</p><form id="obf"><input name="nm" placeholder="Your name" maxlength="30" required autocomplete="off" aria-label="Your name"><button class="go">Continue</button></form>');}
 function obLock(){ob('<div class="obi">\uD83D\uDD12</div><h1>Lock your notebook</h1><p>Set a PIN so only you can open it.'+(bioOK?' You can add fingerprint next.':'')+'</p><button type="button" class="go" data-ob="pin">Set a PIN</button><button type="button" class="lf" data-ob="skip">Skip for now</button>');}
 function obBio(){if(!bioOK){setupFin();toast("PIN saved \uD83D\uDD12");return;}ob('<div class="obi">\uD83D\uDC46</div><h1>Use fingerprint too?</h1><p>Open the app with a touch. Your PIN still works as a backup.</p><button type="button" class="go" data-ob="fp">Turn on fingerprint</button><button type="button" class="lf" data-ob="nofp">Not now</button>');}
@@ -426,6 +445,56 @@ async function startup(){
  if(!setupDone()){var has=S.exp.length+S.lent.length+S.inc.length+S.notes.length+S.sav.tx.length+S.chits.length+S.rem.length>0||S.name!=="Friend"||pinData();if(has){try{localStorage.setItem("mnSetup1","1");}catch(e){}}else{onboard();return;}}
  if(pinData())lkPad("unlock");else lkHide();}
 
+var PK2="mnPlan",CATS=[["Rent","\uD83C\uDFE0",30],["Food","\uD83C\uDF72",18],["Travel","\uD83D\uDE8C",7],["Bills","\uD83D\uDCA1",8],["Fun","\uD83C\uDFAC",7],["Savings","\uD83D\uDC37",25],["Other","\uD83E\uDDE9",5]];
+function rs(n){return"\u20B9"+Math.round(n||0).toLocaleString("en-IN");}
+function F(k){return !(CFG.feat&&CFG.feat[k]===false);}
+function applyFeat(){["sav","lent","chit","plan","rcpt"].forEach(function(k){var b=document.querySelector('#nav [data-t="'+k+'"]');if(b)b.style.display=F(k)?"":"none";});}
+function featCard(){var L=[["sav","\uD83D\uDCB0 Savings"],["lent","\uD83E\uDD1D Lent"],["chit","\uD83E\uDE99 Chits"],["plan","\uD83D\uDCCA Salary plan"],["rcpt","\uD83E\uDDFE Receipts"],["pig","\uD83D\uDC37 Piggy animation"],["notif","\uD83D\uDD14 Notifications"]];
+ return'<div class="row"><b>\u2728 Choose your features</b><span class="meta">Tap to switch features on or off.</span><div class="fts">'+L.map(function(x){return'<button class="chip'+(F(x[0])?' on':'')+'" data-ft="'+x[0]+'">'+x[1]+'</button>';}).join("")+'</div></div>';}
+function LN(){try{return Capacitor.Plugins.LocalNotifications||null;}catch(e){return null;}}
+async function notifOn(){var n=LN();if(!n)return false;try{var p=await n.checkPermissions();if(p.display!=="granted")p=await n.requestPermissions();return p.display==="granted";}catch(e){return false;}}
+var nsT;function syncNotifs(){clearTimeout(nsT);nsT=setTimeout(async function(){var n=LN();if(!n||!F("notif"))return;try{var pd=await n.getPending();if(pd.notifications.length)await n.cancel({notifications:pd.notifications});var l=[{id:1,title:"\uD83D\uDCB0 Money Notebook",body:"Noted today's spending?",schedule:{on:{hour:20,minute:0},allowWhileIdle:true}}],now=Date.now();S.rem.forEach(function(r,i){if(r.done)return;var at=new Date(r.date+"T"+(r.time||"09:00")+":00");if(at.getTime()>now)l.push({id:100+i,title:"\u23F0 Reminder",body:r.text,schedule:{at:at,allowWhileIdle:true}});});await n.schedule({notifications:l.slice(0,60)});}catch(e){}},800);}
+var _sv=save;save=function(){_sv();syncNotifs();};
+/* piggy */
+function piggy(a){if(!F("pig")||!a)return;var inn=a>0,el=$("pig");el.className="";void el.offsetWidth;
+ el.innerHTML='<svg viewBox="0 0 240 190" width="240" height="190"><defs><clipPath id="pc"><ellipse cx="116" cy="100" rx="82" ry="62"/></clipPath></defs><path d="M60 52l-6-26 28 14zM150 44l14-24 10 28z" fill="#FFB3C7"/><rect x="62" y="150" width="22" height="26" rx="8" fill="#FF8FB0"/><rect x="138" y="150" width="22" height="26" rx="8" fill="#FF8FB0"/><ellipse cx="116" cy="100" rx="82" ry="62" fill="#FFD0DE"/><g clip-path="url(#pc)"><rect class="fl '+(inn?'fin':'fout')+'" x="20" y="36" width="200" height="140" fill="'+(inn?'#1FC77E':'#F0484E')+'" opacity=".92"/></g><ellipse cx="116" cy="100" rx="82" ry="62" fill="none" stroke="#fff" stroke-width="5"/><ellipse cx="204" cy="104" rx="22" ry="16" fill="#FF8FB0"/><circle cx="198" cy="104" r="3" fill="#B03A5E"/><circle cx="210" cy="104" r="3" fill="#B03A5E"/><circle cx="170" cy="82" r="5" fill="#2A2A3A"/><rect x="96" y="42" width="40" height="7" rx="3.5" fill="#B03A5E"/><path d="M36 92c-14-4-18 8-8 14" fill="none" stroke="#FF8FB0" stroke-width="5" stroke-linecap="round"/>'+(inn?'<circle class="coin" cx="116" cy="20" r="11" fill="#FFC857" stroke="#E0A030" stroke-width="3"/>':'')+'</svg><div class="pl2" style="color:'+(inn?'#7DF2BC':'#FF9B9F')+'">'+(inn?"+ ":"\u2212 ")+rs(Math.abs(a))+'</div>';
+ el.className="show";clearTimeout(piggy.t);piggy.t=setTimeout(function(){el.className="";},2600);}
+/* plan */
+function ym(){var d=new Date();return d.getFullYear()+"-"+pad2(d.getMonth()+1);}
+function pget(){try{return JSON.parse(localStorage.getItem(PK2)||"null");}catch(e){return null;}}
+function pset(p){try{localStorage.setItem(PK2,JSON.stringify(p));}catch(e){}}
+function guessCat(t){t=(t||"").toLowerCase();var m=[["Rent",/rent|room|hostel|pg\b/],["Food",/food|lunch|dinner|tea|coffee|snack|grocer|milk|swiggy|zomato|veg|rice|biryani/],["Travel",/bus|petrol|fuel|auto|cab|uber|ola|train|metro|ticket/],["Bills",/bill|recharge|wifi|electric|water|emi|gas/],["Fun",/movie|game|party|trip|shop|cloth|fun/]];for(var i=0;i<m.length;i++)if(m[i][1].test(t))return m[i][0];return"Other";}
+function catSel(){return'<label>Category<select name="cat"><option value="">Auto-detect</option>'+CATS.filter(function(c){return c[0]!=="Savings";}).map(function(c){return'<option>'+c[0]+'</option>';}).join("")+'</select></label>';}
+function actual(){var mo=ym(),a={};CATS.forEach(function(c){a[c[0]]=0;});S.exp.forEach(function(x){if((x.date||"").slice(0,7)===mo)a[x.cat||guessCat(x.note)]+=x.amt;});S.sav.tx.forEach(function(t){if(t.amt>0&&!t.ref&&(t.date||"").slice(0,7)===mo)a.Savings+=t.amt;});return a;}
+function planPage(){var p=pget(),A=actual(),h='<h2 class="pt">\uD83D\uDCCA Salary plan</h2>';
+ if(!p||p.m!==ym()){return h+'<div class="box"><label>Monthly salary (\u20B9)<input id="plsal" type="number" inputmode="decimal" min="1" value="'+(p?p.salary:"")+'"></label><button class="go" data-pl="gen">\u2728 Make my smart plan</button><span class="meta">The smart plan splits your salary into rent, food, travel, bills, fun and savings. You can edit your own plan in the first 7 days of the month, then it locks so you can check if you followed it.</span></div>';}
+ var d=new Date(),ed=d.getDate()<=7||Date.now()-p.created<7*864e5,tm=0,ok=0,sp=0,spA=0,dl=new Date(d.getFullYear(),d.getMonth()+1,0).getDate()-d.getDate()+1;
+ CATS.forEach(function(c){var k=c[0],m=p.mine[k]||0,ac=A[k]||0;tm+=m;if(k!=="Savings"){sp+=m;spA+=ac;if(ac<=m)ok++;}});
+ h+='<div class="next"><small>Safe to spend per day</small><b>'+rs(Math.max(0,sp-spA)/dl)+'</b><span>'+ok+' of 6 spending areas on track \u00B7 salary '+rs(p.salary)+'</span></div>';
+ if(Math.round(tm)!==Math.round(p.salary))h+='<div class="empty">Your plan adds up to '+rs(tm)+' but salary is '+rs(p.salary)+'.</div>';
+ CATS.forEach(function(c){var k=c[0],m=p.mine[k]||0,ai=p.ai[k]||0,ac=A[k]||0,pc=m?Math.round(ac/m*100):0,sv=k==="Savings",st=sv?(ac>=m?"\u2705 Goal met":"Keep saving"):(pc>100?"\uD83D\uDD34 Over":pc>80?"\uD83D\uDFE0 Near limit":"\uD83D\uDFE2 On track");
+  h+='<div class="row"><div class="top"><b>'+c[1]+' '+k+'</b><span class="meta">'+st+'</span></div><div class="pr"><div><small>Smart plan</small><b>'+rs(ai)+'</b></div><div><small>My plan</small>'+(ed?'<input class="pin" type="number" inputmode="decimal" data-pm="'+k+'" value="'+m+'">':'<b>'+rs(m)+'</b>')+'</div><div><small>Actual</small><b>'+rs(ac)+'</b></div></div><div class="bar"><i style="width:'+Math.min(100,pc)+'%;background:'+(sv||pc<=80?'var(--inc)':pc>100?'var(--exp)':'var(--lent)')+'"></i></div></div>';});
+ return h+(ed?'<div class="act"><button data-pl="reset">Reset to smart plan</button><button data-pl="new">Change salary</button></div><span class="meta">\u270F\uFE0F You can edit your plan until day 7 of the month.</span>':'<span class="meta">\uD83D\uDD12 Plan is locked until next month so you can see if you followed it.</span>');}
+/* receipts */
+function idb(){return new Promise(function(res,rej){var q=indexedDB.open("mnReceipts",1);q.onupgradeneeded=function(){q.result.createObjectStore("r",{keyPath:"id"});};q.onsuccess=function(){res(q.result);};q.onerror=function(){rej(q.error);};});}
+async function rcAll(){try{var d=await idb();return await new Promise(function(r){var q=d.transaction("r").objectStore("r").getAll();q.onsuccess=function(){r(q.result.sort(function(a,b){return b.ts-a.ts;}));};q.onerror=function(){r([]);};});}catch(e){return[];}}
+async function rcPut(o){var d=await idb();return new Promise(function(r){var t=d.transaction("r","readwrite");t.objectStore("r").put(o);t.oncomplete=r;t.onerror=r;});}
+async function rcDel(i){var d=await idb();return new Promise(function(r){var t=d.transaction("r","readwrite");t.objectStore("r").delete(i);t.oncomplete=r;});}
+function shrink(f){return new Promise(function(res){var im=new Image(),u=URL.createObjectURL(f);im.onload=function(){var k=Math.min(1,1000/Math.max(im.width,im.height)),c=document.createElement("canvas");c.width=im.width*k;c.height=im.height*k;c.getContext("2d").drawImage(im,0,0,c.width,c.height);URL.revokeObjectURL(u);res(c.toDataURL("image/jpeg",.6));};im.onerror=function(){res(null);};im.src=u;});}
+function rcptPage(){setTimeout(rcFill,0);return'<h2 class="pt">\uD83E\uDDFE Bills &amp; receipts</h2><div class="box"><label>What is it for<input id="rct" maxlength="60" placeholder="e.g. Electricity bill"></label><label>Amount (optional)<input id="rca" type="number" inputmode="decimal"></label><label>Photo of the bill<input id="rcf" type="file" accept="image/*"></label><button class="go" data-rc="add">Save receipt</button></div><div id="rclist" class="rcg"></div>';}
+async function rcFill(){var el=$("rclist");if(!el)return;var a=await rcAll();el.innerHTML=a.length?a.map(function(r){return'<div class="rc"><img src="'+r.img+'" data-rcv="'+r.id+'" alt="Receipt"><b>'+esc(r.title)+'</b><small>'+(r.amt?rs(r.amt)+' \u00B7 ':'')+fmt(r.date)+'</small><button data-rcd="'+r.id+'" aria-label="Delete">\uD83D\uDDD1</button></div>';}).join(""):'<div class="empty">No receipts saved yet.</div>';}
+document.getElementById("view").addEventListener("click",async function(e){var b=e.target.closest("[data-pl],[data-rc],[data-rcv],[data-rcd],[data-ft]");if(!b)return;var d=b.dataset;
+ if(d.ft){var k=d.ft;CFG.feat=CFG.feat||{};CFG.feat[k]=!F(k);cfgSave();if(k==="notif"&&F(k)){var g=await notifOn();toast(g?"Notifications on \uD83D\uDD14":"Allow notifications in phone settings");syncNotifs();}render();return;}
+ if(d.pl){var p=pget();if(d.pl==="gen"){var sal=+$("plsal").value;if(!(sal>0)){toast("Enter your salary");return;}var ai={};CATS.forEach(function(c){ai[c[0]]=Math.round(sal*c[2]/100);});pset({m:ym(),salary:sal,ai:ai,mine:Object.assign({},ai),created:Date.now()});}
+  else if(d.pl==="reset"&&p){p.mine=Object.assign({},p.ai);pset(p);}else if(d.pl==="new"){try{localStorage.removeItem(PK2);}catch(x){}}render();return;}
+ if(d.rc==="add"){var f=$("rcf").files[0],t=$("rct").value.trim();if(!f||!t){toast("Add a name and a photo");return;}var img=await shrink(f);if(!img){toast("Could not read photo");return;}await rcPut({id:id(),ts:Date.now(),date:today(),title:t,amt:+$("rca").value||0,img:img});toast("Receipt saved \uD83E\uDDFE");render();return;}
+ if(d.rcd){await rcDel(d.rcd);rcFill();return;}
+ if(d.rcv){var o=document.createElement("div");o.className="rcv";o.innerHTML='<img src="'+b.src+'" alt="Receipt">';o.onclick=function(){o.remove();};document.body.appendChild(o);}});
+document.getElementById("view").addEventListener("change",function(e){var k=e.target.dataset&&e.target.dataset.pm;if(k){var p=pget();if(p){p.mine[k]=Math.max(0,+e.target.value||0);pset(p);render();}}});
+$("burger").onclick=function(){$("nav").classList.toggle("open");$("scrim").classList.toggle("on");};
+function closeNav(){$("nav").classList.remove("open");$("scrim").classList.remove("on");}
+$("scrim").onclick=closeNav;$("nav").addEventListener("click",function(e){if(e.target.closest("button"))closeNav();});
+
 function findLoan(i){return S.lent.filter(function(l){return l.id===i})[0];}
 var view=document.getElementById("view");
 document.getElementById("nav").onclick=function(e){var b=e.target.closest("button");if(b){tab=b.dataset.t;render();window.scrollTo(0,0);}};
@@ -443,7 +512,7 @@ view.onsubmit=function(ev){
  if(tab==="lent"){var n={id:id(),who:g("who").trim(),amt:+g("amt"),start:g("date"),tm:g("tm")||nowT(),intr:+g("intr"),months:+g("months"),payments:[]};S.lent.push(n);if(sv)tx(-n.amt,n.start,"Lent to "+n.who,n.id,n.tm);}
  else if(tab==="chit"){S.chits.push({id:id(),name:g("name").trim(),months:+g("months")||0,dueDay:+g("dd")||0,monthly:+g("ma")||0,recs:[]});}
  else if(tab==="notes"){S.notes.push({id:id(),date:today(),tm:nowT(),text:g("text").trim()});}
- else{var x={id:id(),amt:+g("amt"),date:g("date"),tm:g("tm")||nowT(),note:g("note").trim()};S[tab].push(x);if(sv)tx(tab==="exp"?-x.amt:x.amt,x.date,(tab==="exp"?"Spent: ":"Income: ")+x.note,x.id,x.tm);}
+ else{var x={id:id(),amt:+g("amt"),date:g("date"),tm:g("tm")||nowT(),note:g("note").trim(),cat:(tab==="exp"?g("cat"):"")};S[tab].push(x);if(sv)tx(tab==="exp"?-x.amt:x.amt,x.date,(tab==="exp"?"Spent: ":"Income: ")+x.note,x.id,x.tm);}
  save();render();
 };
 view.onclick=function(e){
@@ -464,7 +533,7 @@ view.onclick=function(e){
  else if(d.q){ask(d.q);}
 };
 view.onchange=function(e){if(e.target.id==="lkafter"){CFG.after=+e.target.value;cfgSave();return;}if(e.target.id==="rf"&&e.target.files[0]){var r=new FileReader();r.onload=function(){document.getElementById("rs").value=r.result;note("File loaded. Tap Restore from text.");};r.readAsText(e.target.files[0]);}};
-render();init();startup();setInterval(greet,15000);setInterval(tick,30000);setTimeout(tick,800);setTimeout(digest,1800);
+render();init();startup();setInterval(greet,15000);syncNotifs();setInterval(tick,30000);setTimeout(tick,800);setTimeout(digest,1800);
 </script>
 <script>if("serviceWorker"in navigator){window.addEventListener("load",function(){navigator.serviceWorker.register("sw.js").catch(function(){});});}</script></body>
 </html>
